@@ -1,4 +1,4 @@
-# OpenShift Baremetal UPI
+# OpenShift Baremetal UPI on vSphere (PoC)
 
 ## Background
 
