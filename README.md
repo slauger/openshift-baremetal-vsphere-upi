@@ -176,5 +176,3 @@ I've set the following VM attributes:
  - `guestinfo.ignition.config.data` to the ignition data (base64 encoded)
  - `guestinfo.ignition.config.data.encoding` to `base64`
  - `disk.EnableUUID` to `TRUE`
-```
-
