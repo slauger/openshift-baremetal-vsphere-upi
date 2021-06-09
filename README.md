@@ -20,6 +20,11 @@ This is the documentation of the required steps for this setup.
 
 ### Environment
 
+- vSphere 7.0
+- VLAN without DHCP server
+- Deployment of RHCOS via OVA
+- External DNS server (dnsmasq)
+
 ### install-config.yaml
 
 The `replicas` field for the master and compute nodes do no matter, because we setup the nodes by our own.
@@ -176,3 +181,14 @@ I've set the following VM attributes:
  - `guestinfo.ignition.config.data` to the ignition data (base64 encoded)
  - `guestinfo.ignition.config.data.encoding` to `base64`
  - `disk.EnableUUID` to `TRUE`
+
+## Wait for setup to complete
+
+```
+openshift-install wait-for bootstrap-complete
+
+# sign csr for worker nodes
+for i in `oc get csr --no-headers | grep -i pending |  awk '{ print $1 }'`; do oc adm certificate approve $i; done
+
+openshift-install wait-for install-complete
+```
