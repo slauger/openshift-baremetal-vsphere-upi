@@ -185,10 +185,11 @@ I've set the following VM attributes:
 ## Wait for setup to complete
 
 ```
-openshift-install wait-for bootstrap-complete
+openshift-install wait-for bootstrap-complete --dir ./cluster1 --log-level=debug
 
 # sign csr for worker nodes
+export KUBECONFIG=cluster1/auth/kubeconfig
 for i in `oc get csr --no-headers | grep -i pending |  awk '{ print $1 }'`; do oc adm certificate approve $i; done
 
-openshift-install wait-for install-complete
+openshift-install wait-for install-complete --dir ./cluster1 --log-level=debug
 ```
