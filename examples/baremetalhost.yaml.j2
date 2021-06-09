@@ -1,0 +1,24 @@
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  annotations:
+  finalizers:
+  - baremetalhost.metal3.io
+  - machine.machine.openshift.io
+  name: {{ inventory_hostname }}
+  namespace: openshift-machine-api
+spec:
+  bmc:
+    address: ""
+    credentialsName: ""
+  bootMACAddress: {{ mac }}
+  consumerRef:
+    apiVersion: machine.openshift.io/v1beta1
+    kind: Machine
+    name: {{ inventory_hostname }}
+    namespace: openshift-machine-api
+  hardwareProfile: unknown
+  online: true
+  userData:
+    name: {{ ignition_role }}-user-data
+    namespace: openshift-machine-api
